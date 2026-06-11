@@ -5,6 +5,7 @@ import { afdelingRoutes } from './router/afdelingRouter.js';
 import { brandRoutes } from './router/brandRouter.js';
 import { categoryRoutes } from './router/categoryRouter.js';
 import { userRoutes } from './router/userRouter.js';
+import { authRoutes } from './router/authRoutes.js';
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use("/afdeling", afdelingRoutes);
 app.use("/brands", brandRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/users", userRoutes);
+app.use("/api", authRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
