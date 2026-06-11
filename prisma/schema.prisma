@@ -39,9 +39,9 @@ model cars {
   id         Int      @id @default(autoincrement())
   model      String
   year       Int
-  price      Float
+  price      Decimal
   fueltype   String
-
+  daCreated DateTime
   brandId    Int
   brand      brand    @relation(fields: [brandId], references: [id])
   categoryId Int
@@ -59,4 +59,9 @@ model brand {
   name String
   logo String
   cars cars[]
+}
+
+model fueltypes {
+  id   Int    @id @default(autoincrement())
+  name String @unique
 }

@@ -1,7 +1,22 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 import { prisma } from '../src/prisma.js';
+
+interface JwtPayload {
+  exp: number;
+  data: {
+    id: number;
+  };
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: { id: number };
+    }
+  }
+}
 
 class AuthController {
   generateToken = (
@@ -73,6 +88,34 @@ class AuthController {
 
     } catch (error: any) {
       res.status(500).json({ message: error.message });
+    }
+  };
+
+  authorize = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const bearerHeader = req.headers["authorization"];
+
+    if (!bearerHeader?.startsWith("Bearer ")) {
+      res.status(401).json({ message: "Token not accepted" });
+      return;
+    }
+
+    const token = bearerHeader.split(" ")[1];
+
+    try {
+      const decoded = jwt.verify(
+        token,
+        process.env.TOKEN_ACCESS_KEY!
+      ) as JwtPayload;
+
+      req.user = decoded.data;
+      next();
+
+    } catch (error: any) {
+      res.status(403).json({ message: error.message });
     }
   };
 }
