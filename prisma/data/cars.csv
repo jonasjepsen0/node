@@ -1,0 +1,11 @@
+brand,category,model,year,price,fueltype
+Volvo,Personbil,XC60,2022,450000,Hybrid
+Volvo,Personbil,V60,2021,380000,Diesel
+BMW,Personbil,X5,2023,850000,Benzin
+BMW,Personbil,i4,2024,620000,El
+Ford,Varevogn,Transit,2020,290000,Diesel
+Ford,Personbil,Focus,2019,145000,Benzin
+Toyota,Personbil,Corolla,2022,220000,Hybrid
+Toyota,Autocamper,Hiace,2018,310000,Diesel
+Mercedes,Lastbil,Actros,2021,1200000,Diesel
+Mercedes,Andre,EQS,2024,1050000,El
